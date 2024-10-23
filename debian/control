@@ -1,0 +1,16 @@
+Source: dynft
+Maintainer: Dameon Wagner <dameon.wagner@it.ox.ac.uk>
+Section: admin
+Priority: optional
+Build-Depends: debhelper (>= 13), python3, dh-python, python3-setuptools,
+ python3-yaml, python3-click, python3-netaddr, python3-dnspython,
+ python3-docutils, python3-nftables
+Standards-Version: 4.6.2.0
+
+Package: dynft
+Architecture: any
+Conflicts: nebula
+Depends: ${shlibs:Depends}, ${misc:Depends}, ${python3:Depends}
+Description: Dynamic ruleset object management for nftables
+ dynft is a command-line tool that can be used to dynamically update
+ nftables ruleset objects.

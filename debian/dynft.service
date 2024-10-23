@@ -1,0 +1,22 @@
+[Unit]
+Description=dynft
+Documentation=man:dynft(1)
+Wants=nftables.service
+After=nftables.service
+PartOf=nftables.service
+Requires=nftables.service
+BindsTo=nftables.service
+DefaultDependencies=no
+ConditionPathExists=/etc/nftables_dynamic.yml
+
+[Service]
+Type=oneshot
+StandardInput=null
+ProtectSystem=full
+ProtectHome=true
+ExecStart=/usr/bin/dynft refreshsets
+ExecReload=/usr/bin/dynft refreshsets
+ExecCondition=/usr/bin/dynft hassets
+
+[Install]
+WantedBy=sysinit.target

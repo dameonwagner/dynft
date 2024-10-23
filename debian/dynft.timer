@@ -1,0 +1,10 @@
+[Unit]
+Description=Scheduled dynft refresh
+Documentation=man:dynft(1)
+ConditionPathExists=/etc/nftables_dynamic.yml
+
+[Timer]
+OnCalendar=*-*-* *:00/15
+
+[Install]
+WantedBy=timers.target

@@ -1,0 +1,11 @@
+#!/usr/bin/make -f
+
+export PYBUILD_NAME=dynft
+
+%:
+	dh $@ --with python3 --buildsystem=pybuild
+
+override_dh_installman:
+	rst2man docs/dynft.rst > dynft.1
+	dh_installman dynft.1
+	dh_installman

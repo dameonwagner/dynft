@@ -1,0 +1,64 @@
+#!/usr/bin/env python3
+#
+# Copyright (C) 2024  Dameon Wagner
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+"""
+dynft
+=====
+
+Dynamic ruleset object management for nftables.
+
+DESCRIPTION
+-----------
+
+Inspired by the IPSets functionality found in netoptions, and originally
+designed solely for the purpose of managing IP address sets (IPv6 and IPv4)
+declared using only FQDNs, with addresses resolved at runtime
+"""
+
+
+import os
+import sys
+import click
+
+from dynft import Config, ConfigException, IPSet
+from dynft.cli import *
+
+@click.group(help='dynft: A tool to dynamically manage nftables ruleset objects')
+@click.option(
+    '--verbose', '-V', is_flag=True, default=False,
+    help='Provide verbose output'
+)
+@click.pass_context
+def cli(__ctx, conf=None, verbose=None):
+    try:
+        config = Config()
+    except ConfigException as CE:
+        print('ERROR: {}'.format(CE.msg), file=sys.stderr)
+        sys.exit(CE.errno)
+
+    config.verbose = True if verbose else False
+
+    __ctx.obj['CONFIG'] = config
+# cli()
+
+
+for subcommand in subcommands:
+    cli.add_command(subcommand)
+
+
+if __name__ == '__main__':
+    cli(obj={})

@@ -1,0 +1,9 @@
+---
+sets:
+  shibboleth_metadata_sources:
+    members:
+      - host: metadata.ukfederation.org.uk
+      - host: mdq.ukfederation.org.uk
+      - literal: 2603:1020:702:3::12
+      - literal: 4.159.3.235
+...
