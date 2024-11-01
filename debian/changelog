@@ -1,5 +1,16 @@
-dynft (0.9.0) UNRELEASED; urgency=medium
+dynft (0.9.1) unstable; urgency=medium
+
+  * lib/dynft/sets.py:
+    - Refactor back to support older versions of python, removing the use
+      of both the walrus operator (introduced in python 3.8) and the match
+      statement (introduced in python 3.10).  This is necessary as we'll
+      need to be supporting both RHEL8 (which provides 3.6.8) and RHEL9
+      (which provides 3.9.18, at the time of commiting).
+
+ -- Dameon Wagner <dameon.wagner@it.ox.ac.uk>  Fri, 01 Nov 2024 17:58:14 +0000
+
+dynft (0.9.0) unstable; urgency=medium
 
   * Initial release.
 
- -- Dameon Wagner <dameon.wagner@it.ox.ac.uk>  Thu, 17 Oct 2024 17:14:22 +0100
+ -- Dameon Wagner <dameon.wagner@it.ox.ac.uk>  Fri, 01 Nov 2024 17:54:04 +0000

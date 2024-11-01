@@ -38,13 +38,12 @@ def ipset_element_factory(members, addr_family='ipv4_addr'):
     """
     elements = []
 
-    match addr_family:
-        case 'ipv4_addr':
-            _rrtype = 'A'
-            _inet_family = 4
-        case 'ipv6_addr':
-            _rrtype = 'AAAA'
-            _inet_family = 6
+    if addr_family == 'ipv6_addr':
+        _rrtype = 'AAAA'
+        _inet_family = 6
+    elif addr_family == 'ipv4_addr':
+        _rrtype = 'A'
+        _inet_family = 4
     
     for member in members:
         if member.get('literal') and not member.get('host'):
@@ -213,8 +212,9 @@ class IPSet:
         """
         add_cmd = dict(add=self._cmd_stub())
 
-        if len(elements := [ e.serialize_cmd() for e in self._elements ]):
-            add_cmd['add']['set'].update(dict(elem = elements))
+        add_elements = [ e.serialize_cmd() for e in self._elements ]
+        if len(add_elements):
+            add_cmd['add']['set'].update(dict(elem = add_elements))
         return add_cmd
 # class:IPSet
 
