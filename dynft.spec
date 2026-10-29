@@ -1,5 +1,5 @@
 Name: dynft
-Version: 0.9.2
+Version: 0.9.3
 Release: 1
 Source0: %{name}_%{version}.tar.gz
 License: GNU GPL
@@ -56,6 +56,14 @@ rm -rf %{buildroot}
 %doc %{_docdir}/%{name}/*
 
 %changelog
+* Thu Oct 29 2026 Dameon Wagner <dameon.wagner@it.ox.ac.uk> - 0.9.3
+- debian/dynft.timer:
+  - Bump the timer cadence to every 5 minutes, rather than 15.  This
+    refreshes the dynft sets more regularly, as a default DNS TTL of  
+    five minutes is pretty commonplace, and we don't want to fall
+    between the gaps.  It does mean more logging output, but rather
+    that than have services fail due to stale IP ACLs (which is the
+    problem that `dynft` attempts to solve).
 * Thu May 07 2026 Dameon Wagner <dameon.wagner@it.ox.ac.uk> - 0.9.2
 - Add dynft.spec for building RPM package too.
 * Fri Nov 01 2024 Dameon Wagner <dameon.wagner@it.ox.ac.uk> - 0.9.1
