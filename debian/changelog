@@ -1,4 +1,4 @@
-dynft (0.9.3) UNRELEASED; urgency=medium
+dynft (0.9.3) unstable; urgency=medium
 
   * debian/dynft.timer:
     - Bump the timer cadence to every 5 minutes, rather than 15.  This 
@@ -8,7 +8,7 @@ dynft (0.9.3) UNRELEASED; urgency=medium
       that than have services fail due to stale IP ACLs (which is the
       problem that `dynft` attempts to solve).
 
- -- Dameon Wagner <dameon.wagner@it.ox.ac.uk>  Thu, 29 Oct 2026 09:41:53 +0000
+ -- Dameon Wagner <dameon.wagner@it.ox.ac.uk>  Thu, 29 Oct 2026 09:49:02 +0000
 
 dynft (0.9.2) unstable; urgency=medium
 
