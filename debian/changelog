@@ -1,3 +1,20 @@
+dynft (0.9.4) UNRELEASED; urgency=medium
+
+  * lib/dynft/sets.py:
+    - Refine dnspython imports, to try and avoid deprecation warnings.
+      This was fallout from some RHEL8 debugging, where it's version
+      of dnspython was too crusty, and needed to revert to the simpler
+      `resolver.query()` function, as `resolve` and `resolve_address`
+      don't exist. Grrr.  A RHEL8 maintenance branch will diverge with
+      that fix.
+  * debian/control:
+    -  Add explicit dependency on "python3-jsonschema", purely for
+       bullseye systems.  The package is required for some functionality
+       but is usually pulled in as a dependency for "python3-nftables".
+       However, the bullseye version doesn't have that dependency. 
+
+ -- Dameon Wagner <dameon.wagner@it.ox.ac.uk>  Fri, 30 Oct 2026 12:09:34 +0000
+
 dynft (0.9.3) unstable; urgency=medium
 
   * debian/dynft.timer:

@@ -1,5 +1,5 @@
 Name: dynft
-Version: 0.9.3
+Version: 0.9.4
 Release: 1
 Source0: %{name}_%{version}.tar.gz
 License: GNU GPL
@@ -56,6 +56,14 @@ rm -rf %{buildroot}
 %doc %{_docdir}/%{name}/*
 
 %changelog
+* Thu Oct 30 2026 Dameon Wagner <dameon.wagner@it.ox.ac.uk> - 0.9.4
+- lib/dynft/sets.py:
+  - Refine dnspython imports, to try and avoid deprecation warnings.
+    This was fallout from some RHEL8 debugging, where it's version
+    of dnspython was too crusty, and needed to revert to the simpler
+    `resolver.query()` function, as `resolve` and `resolve_address`
+    don't exist. Grrr.  A RHEL8 maintenance branch will diverge with
+    that fix.
 * Thu Oct 29 2026 Dameon Wagner <dameon.wagner@it.ox.ac.uk> - 0.9.3
 - debian/dynft.timer:
   - Bump the timer cadence to every 5 minutes, rather than 15.  This
