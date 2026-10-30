@@ -10,7 +10,8 @@ Standards-Version: 4.6.2.0
 Package: dynft
 Architecture: any
 Conflicts: nebula
-Depends: ${shlibs:Depends}, ${misc:Depends}, ${python3:Depends}
+Depends: ${shlibs:Depends}, ${misc:Depends}, ${python3:Depends},
+ python3-jsonschema
 Description: Dynamic ruleset object management for nftables
  dynft is a command-line tool that can be used to dynamically update
  nftables ruleset objects.
