@@ -18,7 +18,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from dns.resolver import resolve, resolve_address, NoAnswer, NXDOMAIN
+from dns.resolver import Resolver, NoAnswer, NXDOMAIN
 from netaddr import IPAddress
 
 ##############################################################################
@@ -36,6 +36,7 @@ def ipset_element_factory(members, addr_family='ipv4_addr'):
     """Take a set members from config, and return a list of IPSetElement
     objects for use as an IPSet object's elements property.
     """
+    resolver = Resolver()
     elements = []
 
     if addr_family == 'ipv6_addr':
@@ -50,7 +51,7 @@ def ipset_element_factory(members, addr_family='ipv4_addr'):
             literal = IPAddress(member.get('literal'))
             if literal.version == _inet_family: 
                 try:
-                    rev_dns = resolve_address(member.get('literal'))[0].to_text()
+                    rev_dns = resolver.resolve_address(literal.format())[0].to_text()
                 except NXDOMAIN:
                     rev_dns = 'IP-LITERAL'
                 elements.append(IPSetElement(dict(
@@ -58,7 +59,7 @@ def ipset_element_factory(members, addr_family='ipv4_addr'):
                 )))
         elif member.get('host') and not member.get('literal'):
             try:
-                addrs = resolve(member.get('host'), _rrtype)
+                addrs = resolver.resolve(member.get('host'), _rrtype)
             except NoAnswer:
                 addrs = []
             except NXDOMAIN:
